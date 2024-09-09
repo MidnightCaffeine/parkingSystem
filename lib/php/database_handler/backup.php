@@ -13,7 +13,7 @@ define("DB_USER", 'root');
 define("DB_PASSWORD", '');
 define("DB_NAME", 'parking_system');
 define("DB_HOST", 'localhost');
-define("BACKUP_DIR", 'backups'); // Comment this line to use same script's directory ('.')
+define("BACKUP_DIR", 'backup'); // Comment this line to use same script's directory ('.')
 define("TABLES", '*'); // Full backup
 //define("TABLES", 'table1 table2 table3'); // Partial backup
 define("CHARSET", 'utf8');

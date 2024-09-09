@@ -21,8 +21,9 @@ session_start();
     ?>
     <main id="main" class="main">
         <section class="section dashboard">
+            <a class="btn btn-primary mb-3" href="backupAndRestore.php" role="button"><i class='bx bx-arrow-back'></i> Go Back</a>
             <div class="container">
-                <?php require_once 'lib/php/database_handler/backup.php';?>
+                <?php require_once 'lib/php/database_handler/backup.php'; ?>
             </div>
         </section>
     </main>

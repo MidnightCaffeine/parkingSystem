@@ -28,7 +28,7 @@ session_start();
                             <h4 class="card-title ms-4">Backup</h4>
                             <p class="card-text ms-4">Save backup of the database.</p>
                             <div class="d-grid gap-2 ms-4 mb-4 me-4">
-                                <a class="btn btn-primary" href="lib/php/database_handler/backup_function.php">Backup</a>
+                                <a class="btn btn-primary" href="backup.php">Backup</a>
                             </div>
                         </div>
                     </div>
@@ -38,7 +38,7 @@ session_start();
                                 <h4 class="card-title ms-4">Restore</h4>
                                 <p class="card-text ms-4">Restore data of the database.</p>
                                 <div class="d-grid gap-2 ms-4 mb-4 me-4">
-                                    <a class="btn btn-primary" href="restore_function.php">Restore</a>
+                                    <a class="btn btn-primary" href="restore.php">Restore</a>
                                 </div>
                             </div>
                         </div>
