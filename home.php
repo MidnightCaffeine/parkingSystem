@@ -9,7 +9,7 @@ session_start();
 
 <head>
     <?php
-    include_once 'assets/components/head.php';  ?>
+    include_once 'assets/components/head.php'; ?>
 </head>
 
 <body>
@@ -21,32 +21,59 @@ session_start();
     ?>
     <main id="main" class="main">
         <section class="section dashboard">
-            <video id="preview" style="background: black; height:80vh; width: 100%;"></video>
-            <script>
-                const args = {
-                    video: document.getElementById('preview')
-                };
-
-                window.URL.createObjectURL = (stream) => {
-                    args.video.srcObject = stream;
-                    return stream;
-                };
-
-                const scanner = new Instascan.Scanner(args);
-
-
-                scanner.addListener('scan', function(content) {
-                    alert('Do you want to open this page?: ' + content);
-                    window.open(content, "_blank");
-                });
-                Instascan.Camera.getCameras().then(cameras => {
-                    if (cameras.length > 0) {
-                        scanner.start(cameras[0]);
-                    } else {
-                        console.error("Please enable Camera!");
-                    }
-                });
-            </script>
+            <h3>Available Parking Slots</h3>
+            <div class="row">
+                <div class="col-xxl-4 col-md-6">
+                    <div class="card info-card sales-card">
+                        <div class="card-body">
+                            <h5 class="card-title">Motorcycle</h5>
+                            <div class="d-flex align-items-center">
+                                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                    <i class="ri-motorbike-fill"></i>
+                                </div>
+                                <div class="ps-3">
+                                    <h6>145</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xxl-4 col-md-6">
+                    <div class="card info-card revenue-card">
+                        <div class="card-body">
+                            <h5 class="card-title">Tricycle</span></h5>
+                            <div class="d-flex align-items-center">
+                                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                    <i class="bi bi-minecart-loaded"></i>
+                                </div>
+                                <div class="ps-3">
+                                    <h6>12</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xxl-4 col-md-6">
+                    <div class="card info-card customers-card">
+                        <div class="card-body">
+                            <h5 class="card-title">Car</span></h5>
+                            <div class="d-flex align-items-center">
+                                <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
+                                    <i class='bx bxs-car'></i>
+                                </div>
+                                <div class="ps-3">
+                                    <h6>64</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <?php
+            if (!isset($_SESSION['user_type'])) {
+                include_once 'lib/php/pages/scanner.php';
+            }
+            ?>
         </section>
     </main>
 

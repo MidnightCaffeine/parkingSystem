@@ -21,7 +21,7 @@ session_start();
     ?>
     <main id="main" class="main">
         <section class="section dashboard">
-            <a class="btn btn-primary" href="backupAndRestore.php" role="button"><i class='bx bx-arrow-back'></i> Go Back</a>
+            <a class="btn btn-primary mb-3" href="backupAndRestore.php" role="button"><i class='bx bx-arrow-back'></i> Go Back</a>
             <div class="container">
                 <form method="post" action="" enctype="multipart/form-data">
                     <div class="input-group ms-auto">

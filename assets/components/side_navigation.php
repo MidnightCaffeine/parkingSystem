@@ -1,17 +1,33 @@
 <aside id="sidebar" class="sidebar">
     <ul class="sidebar-nav" id="sidebar-nav">
         <li class="nav-item">
-            <a class="nav-link " href="home.php">
+            <a class="nav-link <?php if($page != 'Home'){echo 'collapsed';}?>" href="home.php">
                 <i class="bi bi-grid"></i>
-                <span>Dashboard</span>
+                <span>
+                    <?php
+                    
+                    if(isset($_SESSION['user_type'])){
+                        echo 'Dashboard';
+                    }else{
+                        echo 'Scan QR';
+                    }
+                    ?>
+                </span>
             </a>
         </li>
-        <li class="nav-item">
-            <a class="nav-link " href="backupAndRestore.php">
-                <i class="bi bi-hdd-stack"></i>
-                <span>Backup and restore</span>
-            </a>
-        </li>
+            <?php
+                if(isset($_SESSION['user_type'])){
+            ?>
+                <li class="nav-item">
+                    <a class="nav-link <?php if($page != ''){echo 'collapsed';}?>" href="backupAndRestore.php">
+                        <i class="bi bi-hdd-stack"></i>
+                        <span>Backup and restore</span>
+                    </a>
+                 </li>
+            <?php
+                }
+            ?>
+
         <!-- <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
                 <i class="bi bi-gem"></i>
