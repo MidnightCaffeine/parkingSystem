@@ -19,7 +19,7 @@ if (isset($_POST['login'])) {
     if (password_verify($password, $row['password'])) {
 
         $user_id =  $row['user_id'];
-        $_SESSION['user_id'] = $row['user_id'];
+        $_SESSION['user_id'] = $user_id;
         $_SESSION['user_email'] = $email;
         if ($row['user_type'] == 1) {
             $_SESSION['user_type'] = 'Administrator';
@@ -32,6 +32,20 @@ if (isset($_POST['login'])) {
         while ($row = $select->fetch(PDO::FETCH_ASSOC)) {
             $_SESSION['user_name'] = $row['firstname'] . ' ' . $row['lastname'];
             $_SESSION['user_firstname'] = $row['firstname'];
+            if (!isset($_SESSION['user_type'])) {
+                switch($row['vehicle_type']){
+                    case 1:
+                        $_SESSION['vehicle_type'] = 'Car';
+                        break;    
+                    case 2:
+                    
+                        $_SESSION['vehicle_type'] = 'Tricycle';
+                        break;
+                    case 3: 
+                        $_SESSION['vehicle_type'] = 'Motorcyle';
+                        break;
+                }
+            }
         };
 
         $insertLog = $pdo->prepare("INSERT INTO user_logs(user_id, username, action) values(:id, :user, :action)");

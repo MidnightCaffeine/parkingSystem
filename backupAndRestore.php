@@ -1,5 +1,5 @@
 <?php
-$page = "Home";
+$page = "Backup And Restore";
 require_once 'lib/php/database_handler/connection.php';
 session_start();
 

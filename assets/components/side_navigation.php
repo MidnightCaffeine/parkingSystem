@@ -5,7 +5,6 @@
                 <i class="bi bi-grid"></i>
                 <span>
                     <?php
-                    
                     if(isset($_SESSION['user_type'])){
                         echo 'Dashboard';
                     }else{
@@ -19,11 +18,11 @@
                 if(isset($_SESSION['user_type'])){
             ?>
                 <li class="nav-item">
-                    <a class="nav-link <?php if($page != ''){echo 'collapsed';}?>" href="backupAndRestore.php">
+                    <a class="nav-link <?php if($page != 'Backup And Restore' ){echo 'collapsed';}?>" href="backupAndRestore.php">
                         <i class="bi bi-hdd-stack"></i>
                         <span>Backup and restore</span>
                     </a>
-                 </li>
+                </li>
             <?php
                 }
             ?>
