@@ -32,7 +32,7 @@ session_start();
                                         <p class="text-center small">Enter your username & password to login</p>
                                     </div>
                                     <form class="row g-3 needs-validation" id="login_form" novalidate>
-                                        <p class="form-message"></p>
+                                        <p class="login-message"></p>
                                         <div class="col-12">
                                             <label for="email" class="form-label">Email</label>
                                             <div class="input-group has-validation">
@@ -48,11 +48,11 @@ session_start();
                                                 required>
                                             <div class="invalid-feedback">Please enter your password!</div>
                                         </div>
-                                        <div class="col-12">
+                                        <!-- <div class="col-12">
                                             <div class="form-check"> <input class="form-check-input" type="checkbox"
                                                     name="remember" value="true" id="rememberMe"> <label
                                                     class="form-check-label" for="rememberMe">Remember me</label></div>
-                                        </div>
+                                        </div> -->
                                         <div class="col-12"> <button id="login_button" class="btn btn-primary w-100"
                                                 type="submit">Login</button></div>
                                         <div class="col-12">
@@ -152,6 +152,14 @@ session_start();
                         <div class="form-floating mb-3">
                             <input type="text" class="form-control" id="body_number" name="body_number" placeholder="password">
                             <label for="body_number">Body Number</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <select class="form-select" id="vehicle_type" name="vehicle_type">
+                                <option value="1">Car</option>
+                                <option value="2">Tricycle</option>
+                                <option value="3">Motor</option>
+                            </select>
+                            <label for="vehicle_type">Vehicle Type</label>
                         </div>
                         <div class="form-floating mb-3">
                             <input type="password" class="form-control" id="register_password" name="register_password" placeholder="password">

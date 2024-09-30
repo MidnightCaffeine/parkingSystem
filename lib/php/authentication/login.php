@@ -18,44 +18,52 @@ if (isset($_POST['login'])) {
 
     if (password_verify($password, $row['password'])) {
 
-        $user_id =  $row['user_id'];
-        $_SESSION['user_id'] = $user_id;
-        $_SESSION['user_email'] = $email;
-        if ($row['user_type'] == 1) {
-            $_SESSION['user_type'] = 'Administrator';
-            $_SESSION['user_name'] = 'Administrator';
-            $_SESSION['user_firstname'] = 'Administrator';
-        }
-        $action = 'Logged to the system';
-        $select = $pdo->prepare("SELECT * FROM user_details WHERE user_id = '$user_id'");
-        $select->execute();
-        while ($row = $select->fetch(PDO::FETCH_ASSOC)) {
-            $_SESSION['user_name'] = $row['firstname'] . ' ' . $row['lastname'];
-            $_SESSION['user_firstname'] = $row['firstname'];
-            if (!isset($_SESSION['user_type'])) {
-                switch($row['vehicle_type']){
-                    case 1:
-                        $_SESSION['vehicle_type'] = 'Car';
-                        break;    
-                    case 2:
-                    
-                        $_SESSION['vehicle_type'] = 'Tricycle';
-                        break;
-                    case 3: 
-                        $_SESSION['vehicle_type'] = 'Motorcyle';
-                        break;
+        if ($row['status'] != 0) {
+            $can_login = 1;
+
+            $user_id = $row['user_id'];
+            $_SESSION['user_id'] = $user_id;
+            $_SESSION['user_email'] = $email;
+            if ($row['user_type'] == 1) {
+                $_SESSION['user_type'] = 'Administrator';
+                $_SESSION['user_name'] = 'Administrator';
+                $_SESSION['user_firstname'] = 'Administrator';
+            } elseif ($row['user_type'] == 3) {
+                $_SESSION['user_type'] = 'Guard';
+                $_SESSION['user_name'] = 'Guard';
+                $_SESSION['user_firstname'] = 'Guard';
+            } else {
+                $_SESSION['user_name'] = $row['firstname'] . ' ' . $row['lastname'];
+                $_SESSION['user_firstname'] = $row['firstname'];
+                if (!isset($_SESSION['user_type'])) {
+                    switch ($row['vehicle_type']) {
+                        case 1:
+                            $_SESSION['vehicle_type'] = 'Car';
+                            break;
+                        case 2:
+
+                            $_SESSION['vehicle_type'] = 'Tricycle';
+                            break;
+                        case 3:
+                            $_SESSION['vehicle_type'] = 'Motorcyle';
+                            break;
+                    }
                 }
+
             }
-        };
 
-        $insertLog = $pdo->prepare("INSERT INTO user_logs(user_id, username, action) values(:id, :user, :action)");
+            $action = 'Logged to the system';
 
-        $insertLog->bindParam(':id', $user_id);
-        $insertLog->bindParam(':user', $_SESSION['user_name']);
-        $insertLog->bindParam(':action', $action);
-        $insertLog->execute();
+            $insertLog = $pdo->prepare("INSERT INTO user_logs(user_id, username, action) values(:id, :user, :action)");
 
-        $can_login = true;
+            $insertLog->bindParam(':id', $user_id);
+            $insertLog->bindParam(':user', $_SESSION['user_name']);
+            $insertLog->bindParam(':action', $action);
+            $insertLog->execute();
+        } else {
+            $can_login = 0;
+        }
+
     }
 }
 ?>
@@ -63,7 +71,7 @@ if (isset($_POST['login'])) {
 <script>
     var login = <?php echo $can_login; ?>;
 
-    if (login == true) {
+    if (login == 1) {
         Swal.fire({
             title: "Login Successful!",
             text: "Redirecting to home page",
@@ -73,8 +81,15 @@ if (isset($_POST['login'])) {
             showConfirmButton: false,
         });
 
-        setTimeout(function() {
+        setTimeout(function () {
             window.location.replace("home.php"); //will redirect to homepage
         }, 2000); //redirect after 2 seconds
+    } else {
+        Swal.fire({
+            title: "Comlete your registration",
+            text: "Authenticate your information on the admin to complete",
+            icon: "warning",
+            showConfirmButton: true,
+        });
     }
 </script>

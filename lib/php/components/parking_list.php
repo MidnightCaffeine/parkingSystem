@@ -17,7 +17,7 @@
                     <tr>
                         <th>Parking #</th>
                         <th>Name</th>
-                        <th>Plate Number</th>
+                        <th>Plate Number</th>  
                         <th>Time In</th>
                         <th>Time Out</th>
                         <th>Vehicle Type</th>

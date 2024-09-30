@@ -19,6 +19,7 @@ if (isset($_POST['signUp'])) {
   $body_number = $_POST['body_number'];
   $password = $_POST['register_password'];
   $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+  $vehicle_type = $_POST['vehicle_type'];
 
 
   $select = $pdo->prepare("SELECT email from users where email= :email");
@@ -35,33 +36,22 @@ if (isset($_POST['signUp'])) {
       ';
     } else {
 
-      $query = "INSERT into users(email,password) values(:email,:password)";
+      $query = "INSERT into users(email, password, firstname, lastname, middlename, department, year_group, section, mv_file, body_number, vehicle_type) values(:email, :password, :firstname, :lastname, :middlename, :department, :year_group, :section, :mv_file, :body_number, :vehicle_type)";
       $insert = $pdo->prepare($query);
       $insert->bindParam(':email', $email);
       $insert->bindParam(':password', $hashedPassword);
+      $insert->bindParam(':firstname', $firstname);
+      $insert->bindParam(':firstname', $firstname);
+      $insert->bindParam(':lastname', $lastname);
+      $insert->bindParam(':middlename', $middlename);
+      $insert->bindParam(':department', $department);
+      $insert->bindParam(':year_group', $year_group);
+      $insert->bindParam(':section', $section);
+      $insert->bindParam(':mv_file', $mv_file);
+      $insert->bindParam(':body_number', $body_number);
+      $insert->bindParam(':vehicle_type', $vehicle_type);
       if ($insert->execute()) {
-        $select = $pdo->prepare("SELECT user_id FROM users WHERE email= :email");
-        $select->bindParam(':email', $email);
-        $select->execute();
 
-        while ($row = $select->fetch(PDO::FETCH_ASSOC)) {
-          $user_id = $row['user_id'];
-        }
-
-        $query = "INSERT into user_details(user_id, firstname, lastname, middlename, department, year_group, section, mv_file, body_number) values(:user_id,:firstname, :lastname, :middlename, :department, :year_group, :section, :mv_file,:body_number)";
-        $insert = $pdo->prepare($query);
-        $insert->bindParam(':user_id', $user_id);
-        $insert->bindParam(':firstname', $firstname);
-        $insert->bindParam(':firstname', $firstname);
-        $insert->bindParam(':lastname', $lastname);
-        $insert->bindParam(':middlename', $middlename);
-        $insert->bindParam(':department', $department);
-        $insert->bindParam(':year_group', $year_group);
-        $insert->bindParam(':section', $section);
-        $insert->bindParam(':mv_file', $mv_file);
-        $insert->bindParam(':body_number', $body_number);
-
-        if ($insert->execute()) {
           echo '
         <script type="text/javascript">
           Swal.fire({
@@ -71,7 +61,7 @@ if (isset($_POST['signUp'])) {
           });
         </script>
       ';
-        }
+        
       }
     }
   }

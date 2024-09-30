@@ -30,4 +30,3 @@
 <link href="assets/css/simple-datatables.css" rel="stylesheet">
 <link href="assets/css/style.css" rel="stylesheet">
 <script type="text/javascript" src="assets/js/sweetalert.js"></script>
-<script type="text/javascript" src="assets/js/html5-qrcode.min.js"></script>

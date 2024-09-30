@@ -28,8 +28,10 @@ session_start();
                 include_once 'lib/php/components/available_slots.php';
                 if (!isset($_SESSION['user_type'])) {
                     include_once 'lib/php/components/scanner.php';
+                }if (isset($_SESSION['user_type']) && $_SESSION['user_type'] == 'Administrator') {
+                    include_once 'lib/php/components/register_approve.php';
                 }
-                if (isset($_SESSION['user_type'])) {
+                if (isset($_SESSION['user_type']) && $_SESSION['user_type'] == 'Guard') {
                     include_once 'lib/php/components/parking_list.php';
                 }
                 ?>
@@ -42,7 +44,7 @@ session_start();
 
     include_once 'assets/components/footer.php';
     include_once 'assets/components/main_scripts.php';
-
+    include_once 'lib/php/components/modals.php';
     ?>
 
 </body>
