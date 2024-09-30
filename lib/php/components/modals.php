@@ -15,8 +15,13 @@
                     </label>
                 </div>
 
-                <div id="view_info">
-                    
+                <div id="view_info" class="mt-2">
+                    <h5>Name: <span id="name"></span> </h5>
+                    <h5>Year and Section: <span id="year_section"></span> </h5>
+                    <h5>Department: <span id="dept"></span> </h5>
+                    <h5>Vehicle Type: <span id="vehicle"></span> </h5>
+                    <h5>Plate Number: <span id="plate_num"></span> </h5>
+                    <h5>Body Number: <span id="body_num"></span> </h5>
                 </div>
                 <div id="edit_form">
                     <form id="registration_form" action="" method="post">

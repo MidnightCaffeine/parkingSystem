@@ -93,6 +93,13 @@
                     $("#mv_file").val(data.mv_file);
                     $("#body_number").val(data.body_number);
                     $("#vehicle_type").val(data.vehicle_type);
+
+                    $("#name").text(data.name);
+                    $("#year_section").text(data.year_section);
+                    $("#dept").text(data.department);
+                    $("#vehicle").text(data.vehicle_type);
+                    $("#plate_num").text(data.mv_file);
+                    $("#body_num").text(data.body_number);
                 },
             });
         });
@@ -101,8 +108,10 @@
         $("#edit_info").change(function () {
             if ($("#edit_info").is(":checked")) {
                 $("#edit_form").show();
+                $("#view_info").hide();
             } else {
                 $("#edit_form").hide();
+                $("#view_info").show();
             }
         });
 

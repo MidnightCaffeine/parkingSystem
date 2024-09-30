@@ -21,6 +21,9 @@ if (isset($_POST['user_id'])) {
         $output["body_number"] = $row["body_number"];
         $output["vehicle_type"] = $row["vehicle_type"];
         $output["user_name"] = $row["firstname"] . ' '. $row["lastname"];
+        $output["name"] = $row["firstname"] . ' ' . $row["middlename"] . ' ' . $row["lastname"];
+        $output["year_section"] = $row["year_group"] . ' Section ' . $row["section"];
+
     }
     echo json_encode($output);
 }
