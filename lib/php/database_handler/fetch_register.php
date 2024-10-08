@@ -1,6 +1,7 @@
 <?php
 
 require_once 'connection.php';
+session_start();
 $count = 1;
 
 
@@ -19,7 +20,7 @@ if (isset($_POST["action"])) {
         }
 
         if (isset($_POST["search"]["value"])) {
-            $search_query .= '(user_id LIKE "%' . $_POST["search"]["value"] . '%" OR email LIKE "%' . $_POST["search"]["value"] . '%" OR created_at LIKE "%' . $_POST["search"]["value"] . '%")';
+            $search_query .= '(mv_file LIKE "%' . $_POST["search"]["value"] . '%" OR body_number LIKE "%' . $_POST["search"]["value"] . '%" OR created_at LIKE "%' . $_POST["search"]["value"] . '%" OR firstname LIKE "%' . $_POST["search"]["value"] . '%" OR lastname LIKE "%' . $_POST["search"]["value"] . '%" OR middlename LIKE "%' . $_POST["search"]["value"] . '%")';
         }
 
 
@@ -58,35 +59,75 @@ if (isset($_POST["action"])) {
 
         foreach ($result as $row) {
 
-            if ($row['status'] == 0) {
+            if ($_SESSION['page'] == 'Users') {
+                if ($row['user_status'] == 1 && $row['user_type'] == 2) {
 
-                $sub_array = array();
-                $sub_array[] = $count;
+                    $sub_array = array();
+                    $sub_array[] = $count;
 
-                $name = $row['firstname'] . ' ' . $row['middlename'] . ' ' . $row['lastname'];
-                $sub_array[] = $name;
+                    $name = $row['firstname'] . ' ' . $row['middlename'] . ' ' . $row['lastname'];
+                    $sub_array[] = $name;
 
-                $sub_array[] = $row['mv_file'];
-                $sub_array[] = $row['body_number'];
+                    $sub_array[] = $row['mv_file'];
+                    $sub_array[] = $row['body_number'];
 
-                switch ($row['vehicle_type']) {
-                    case 1:
-                        $vehicle_type = 'Car';
-                        break;
-                    case 2:
+                    switch ($row['vehicle_type']) {
+                        case 1:
+                            $vehicle_type = 'Car';
+                            break;
+                        case 2:
 
-                        $vehicle_type = 'Tricycle';
-                        break;
-                    case 3:
-                        $vehicle_type = 'Motorcyle';
-                        break;
+                            $vehicle_type = 'Tricycle';
+                            break;
+                        case 3:
+                            $vehicle_type = 'Motorcyle';
+                            break;
+                    }
+
+                    $sub_array[] = $vehicle_type;
+
+                    $created_at = strtotime($row['created_at']);
+                    $sub_array[] = date("F d Y", $created_at);
+                    $sub_array[] = '
+                                <button type="button" id="' . $row['user_id'] . '" class="btn btn-success view_user">
+                                    <i class="bi bi-eye"></i>
+                                </button>
+                                <button type="button" id="' . $row['user_id'] . '" class="btn btn-danger delete_user">
+                                    <i class="bi bi-trash"></i>
+                                </button>
+                                ';
+                    $data[] = $sub_array;
                 }
+            } else {
+                if ($row['user_status'] == 0) {
 
-                $sub_array[] = $vehicle_type;
+                    $sub_array = array();
+                    $sub_array[] = $count;
 
-                $created_at = strtotime($row['created_at']);
-                $sub_array[] = date("F d Y", $created_at);
-                $sub_array[] = '
+                    $name = $row['firstname'] . ' ' . $row['middlename'] . ' ' . $row['lastname'];
+                    $sub_array[] = $name;
+
+                    $sub_array[] = $row['mv_file'];
+                    $sub_array[] = $row['body_number'];
+
+                    switch ($row['vehicle_type']) {
+                        case 1:
+                            $vehicle_type = 'Car';
+                            break;
+                        case 2:
+
+                            $vehicle_type = 'Tricycle';
+                            break;
+                        case 3:
+                            $vehicle_type = 'Motorcyle';
+                            break;
+                    }
+
+                    $sub_array[] = $vehicle_type;
+
+                    $created_at = strtotime($row['created_at']);
+                    $sub_array[] = date("F d Y", $created_at);
+                    $sub_array[] = '
                                 <button type="button" id="' . $row['user_id'] . '" class="btn btn-success view_user">
                                     <i class="bi bi-eye"></i>
                                 </button>
@@ -97,8 +138,11 @@ if (isset($_POST["action"])) {
                                     <i class="bi bi-clipboard-check"></i> Approve
                                 </button>
                                 ';
-                $data[] = $sub_array;
+                    $data[] = $sub_array;
+                }
             }
+
+
 
             $count++;
         }

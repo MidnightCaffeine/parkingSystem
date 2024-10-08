@@ -1,7 +1,8 @@
 <?php
-$page = "Home";
 require_once 'lib/php/database_handler/connection.php';
 session_start();
+
+$_SESSION['page'] = 'Home';
 
 ?>
 <!DOCTYPE html>

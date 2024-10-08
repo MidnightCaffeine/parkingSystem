@@ -1,8 +1,9 @@
 <?php
-$page = "Restore";
 require_once 'lib/php/database_handler/connection.php';
 session_start();
-
+ini_set('display_errors', 0);
+date_default_timezone_set("Asia/Manila");
+$_SESSION['page'] = "Restore";
 ?>
 <!DOCTYPE html>
 <html lang="en">

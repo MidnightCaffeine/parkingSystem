@@ -71,7 +71,7 @@ class Backup_Database
         $this->charset         = $charset;
         $this->conn            = $this->initializeDatabase();
         $this->backupDir       = BACKUP_DIR ? BACKUP_DIR : '.';
-        $this->backupFile      = 'backup-' . $this->dbName . '-' . date("F_j_Y_g-i_a", time()) . '.sql';
+        $this->backupFile      = 'backup-' . $this->dbName . '-' . date("F_j_Y_g_i_a", time()) . '.sql';
         $this->gzipBackupFile  = defined('GZIP_BACKUP_FILE') ? GZIP_BACKUP_FILE : true;
     }
     protected function initializeDatabase()

@@ -1,7 +1,8 @@
 <?php
-$page = "Backup";
+$_SESSION['page'] = "Backup";
 require_once 'lib/php/database_handler/connection.php';
 session_start();
+date_default_timezone_set("Asia/Manila");
 
 ?>
 <!DOCTYPE html>

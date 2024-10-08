@@ -1,5 +1,5 @@
 <div class="container">
-        <h1>Scan QR Codes</h1>
+        <h1>Scan QR to park</h1>
         <div class="section">
             <div id="my-qr-reader">
             </div>
@@ -23,6 +23,9 @@ domReady(function () {
     // If found you qr code
     function onScanSuccess(decodeText, decodeResult) {
         alert("You Qr is : " + decodeText, decodeResult);
+
+        var qr_data = decodeText, decodeResult;
+
     }
 
     let htmlscanner = new Html5QrcodeScanner(

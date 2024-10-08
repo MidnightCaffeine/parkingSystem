@@ -1,5 +1,4 @@
 <?php
-$page = "Login";
 require_once 'lib/php/database_handler/connection.php';
 session_start();
 

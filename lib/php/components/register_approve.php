@@ -72,6 +72,12 @@
         $(document).on("click", ".view_user", function () {
             var user_id = $(this).attr("id");
 
+            if ($("#edit_info").is(":checked")) {
+                $('#edit_info').prop('checked', false);
+                $("#edit_form").hide();
+                $("#view_info").show();
+            }
+
             $.ajax({
                 url: "lib/php/user/fetch_user.php",
                 method: "POST",
@@ -97,7 +103,7 @@
                     $("#name").text(data.name);
                     $("#year_section").text(data.year_section);
                     $("#dept").text(data.department);
-                    $("#vehicle").text(data.vehicle_type);
+                    $("#vehicle").text(data.vehicle);
                     $("#plate_num").text(data.mv_file);
                     $("#body_num").text(data.body_number);
                 },
@@ -113,6 +119,126 @@
                 $("#edit_form").hide();
                 $("#view_info").show();
             }
+        });
+
+        $(document).on("click", ".delete_user", function () {
+            var user_id = $(this).attr("id");
+
+            Swal.fire({
+                title: "Decline this user?",
+                text: "You won't be able to revert this!",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, decline!",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: "lib/php/user/delete_user.php",
+                        method: "POST",
+                        data: {
+                            user_id,
+                        },
+                        success: function (data) {
+                            Swal.fire({
+                                title: "Declined!",
+                                text: "User has been declined",
+                                icon: "success",
+                                timer: 2000,
+                                timerProgressBar: true,
+                                showConfirmButton: false,
+                            });
+                            $("#user_table").DataTable().ajax.reload();
+                        },
+                    });
+                }
+            });
+        });
+
+        $(document).on("click", ".approve", function () {
+            var user_id = $(this).attr("id");
+            var approve = true;
+
+            Swal.fire({
+                title: "Authenticate this user?",
+                text: "All informations are matched?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#3085d6",
+                cancelButtonColor: "#d33",
+                confirmButtonText: "Yes, approve!",
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url: "lib/php/user/update_user.php",
+                        method: "POST",
+                        data: {
+                            user_id,
+                            approve,
+                        },
+                        success: function (data) {
+                            Swal.fire({
+                                title: "Approved!",
+                                text: "User has been approved!",
+                                icon: "success",
+                                timer: 2000,
+                                timerProgressBar: true,
+                                showConfirmButton: false,
+                            });
+                            $("#user_table").DataTable().ajax.reload();
+                        },
+                    });
+                }
+            });
+        });
+
+        $("#registration_form").submit(function (event) {
+            event.preventDefault();
+
+            var firstname = $("#firstname").val();
+            var lastname = $("#lastname").val();
+            var middlename = $("#middlename").val();
+            var department = $("#department").val();
+            var year_group = $("#year_group").val();
+            var section = $("#section").val();
+            var mv_file = $("#mv_file").val();
+            var body_number = $("#body_number").val();
+            var vehicle_type = $("#vehicle_type").val();
+            var user_id = $("#user_id").val();
+            var edit_info = $("#edit_info").val();
+
+
+            $.ajax({
+                url: "lib/php/user/update_user.php",
+                method: "POST",
+                data: {
+                    firstname,
+                    lastname,
+                    middlename,
+                    department,
+                    year_group,
+                    section,
+                    mv_file,
+                    body_number,
+                    vehicle_type,
+                    user_id,
+                    edit_info,
+                },
+                success: function (data) {
+                    Swal.fire({
+                        title: "Successful!",
+                        text: "User information has been updated!",
+                        icon: "success",
+                        timer: 2000,
+                        timerProgressBar: true,
+                        showConfirmButton: false,
+                    });
+                    $("#user_table").DataTable().ajax.reload();
+                    $("#user_form").modal("hide");
+                },
+            });
+
         });
 
     });

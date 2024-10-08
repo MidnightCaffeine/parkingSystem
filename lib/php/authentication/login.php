@@ -18,7 +18,7 @@ if (isset($_POST['login'])) {
 
     if (password_verify($password, $row['password'])) {
 
-        if ($row['status'] != 0) {
+        if ($row['user_status'] != 0) {
             $can_login = 1;
 
             $user_id = $row['user_id'];
@@ -86,7 +86,7 @@ if (isset($_POST['login'])) {
         }, 2000); //redirect after 2 seconds
     } else {
         Swal.fire({
-            title: "Comlete your registration",
+            title: "Complete your registration",
             text: "Authenticate your information on the admin to complete",
             icon: "warning",
             showConfirmButton: true,

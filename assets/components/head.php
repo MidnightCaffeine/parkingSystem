@@ -1,6 +1,14 @@
 <meta charset="utf-8">
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
-<title><?php echo $page; ?></title>
+<title>
+    <?php
+    if (isset($_SESSION['page'])) {
+        echo $_SESSION['page'];
+    }else{
+        echo 'Login';
+    }
+    ?>
+</title>
 <meta name="robots" content="noindex, nofollow">
 <meta content="" name="description">
 <meta content="" name="keywords">

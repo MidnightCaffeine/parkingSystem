@@ -1,7 +1,7 @@
 <?php
-$page = "Backup And Restore";
 require_once 'lib/php/database_handler/connection.php';
 session_start();
+$_SESSION['page'] = "Backup And Restore";
 
 ?>
 <!DOCTYPE html>
