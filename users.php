@@ -40,9 +40,9 @@ $_SESSION['page'] = "Users";
                                     <th>#</th>
                                     <th>Name</th>
                                     <th>Plate Number</th>
-                                    <th>Body Number</th>
                                     <th>Vehicle Type</th>
-                                    <th>Date</th>
+                                    <th>Department</th>
+                                    <th>Section</th>
                                     <th>Action</th>
                                 </tr>
                             </thead>

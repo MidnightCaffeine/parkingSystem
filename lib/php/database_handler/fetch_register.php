@@ -2,7 +2,7 @@
 
 require_once 'connection.php';
 session_start();
-$count = 1;
+$count = 0;
 
 
 if (isset($_POST["action"])) {
@@ -60,43 +60,81 @@ if (isset($_POST["action"])) {
         foreach ($result as $row) {
 
             if ($_SESSION['page'] == 'Users') {
-                if ($row['user_status'] == 1 && $row['user_type'] == 2) {
+                if ($_SESSION['user_type'] == 'Administrator') {
+                    if ($row['user_status'] == 1 && $row['user_type'] == 2) {
 
-                    $sub_array = array();
-                    $sub_array[] = $count;
+                        $sub_array = array();
+                        $sub_array[] = $count;
 
-                    $name = $row['firstname'] . ' ' . $row['middlename'] . ' ' . $row['lastname'];
-                    $sub_array[] = $name;
+                        $name = $row['firstname'] . ' ' . $row['middlename'] . ' ' . $row['lastname'];
+                        $sub_array[] = $name;
 
-                    $sub_array[] = $row['mv_file'];
-                    $sub_array[] = $row['body_number'];
+                        $sub_array[] = $row['mv_file'];
 
-                    switch ($row['vehicle_type']) {
-                        case 1:
-                            $vehicle_type = 'Car';
-                            break;
-                        case 2:
+                        switch ($row['vehicle_type']) {
+                            case 1:
+                                $vehicle_type = 'Car';
+                                break;
+                            case 2:
 
-                            $vehicle_type = 'Tricycle';
-                            break;
-                        case 3:
-                            $vehicle_type = 'Motorcyle';
-                            break;
-                    }
+                                $vehicle_type = 'Tricycle';
+                                break;
+                            case 3:
+                                $vehicle_type = 'Motorcyle';
+                                break;
+                        }
 
-                    $sub_array[] = $vehicle_type;
+                        $sub_array[] = $vehicle_type;
 
-                    $created_at = strtotime($row['created_at']);
-                    $sub_array[] = date("F d Y", $created_at);
-                    $sub_array[] = '
+                        $sub_array[] = $row['department'];
+
+                        $sub_array[] = $row['section'];
+                        $sub_array[] = '
                                 <button type="button" id="' . $row['user_id'] . '" class="btn btn-success view_user">
-                                    <i class="bi bi-eye"></i>
+                                    <i class="bi bi-eye"></i> View
                                 </button>
                                 <button type="button" id="' . $row['user_id'] . '" class="btn btn-danger delete_user">
-                                    <i class="bi bi-trash"></i>
+                                    <i class="bi bi-trash"></i> Delete
                                 </button>
                                 ';
-                    $data[] = $sub_array;
+                        $data[] = $sub_array;
+                    }
+                } else {
+                    if ($row['user_status'] == 1 && $row['user_type'] == 2) {
+
+                        $sub_array = array();
+                        $sub_array[] = $count;
+
+                        $name = $row['firstname'] . ' ' . $row['middlename'] . ' ' . $row['lastname'];
+                        $sub_array[] = $name;
+
+                        $sub_array[] = $row['mv_file'];
+
+                        switch ($row['vehicle_type']) {
+                            case 1:
+                                $vehicle_type = 'Car';
+                                break;
+                            case 2:
+
+                                $vehicle_type = 'Tricycle';
+                                break;
+                            case 3:
+                                $vehicle_type = 'Motorcyle';
+                                break;
+                        }
+
+                        $sub_array[] = $vehicle_type;
+
+                        $sub_array[] = $row['department'];
+
+                        $sub_array[] = $row['section'];
+                        $sub_array[] = '
+                                <button type="button" id="' . $row['user_id'] . '" class="btn btn-success view_user">
+                                    <i class="bi bi-eye"></i> View Details
+                                </button>
+                                ';
+                        $data[] = $sub_array;
+                    }
                 }
             } else {
                 if ($row['user_status'] == 0) {

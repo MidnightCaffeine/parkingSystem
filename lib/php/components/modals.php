@@ -7,12 +7,21 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" value="" id="edit_info">
-                    <label class="form-check-label" for="edit_info">
-                        Edit Information
-                    </label>
-                </div>
+
+                <?php
+                if ($_SESSION['user_type'] == 'Administrator') {
+                    ?>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" value="" id="edit_info">
+                        <label class="form-check-label" for="edit_info">
+                            Edit Information
+                        </label>
+                    </div>
+                    <?php
+                }
+                ?>
+
+
                 <div id="view_info" class="mt-2">
                     <h5>Name: <span id="name"></span> </h5>
                     <h5>Year and Section: <span id="year_section"></span> </h5>
@@ -96,8 +105,8 @@
                         </div>
                         <input type="text" class="form-control" id="user_id" name="user_id" hidden>
                         <div class="col-md-12 text-center block">
-                            <button type="submit" name="edit_info" id="edit_info"
-                                class="btn btn-secondary w-100">Save Changes</button>
+                            <button type="submit" name="edit_info" id="edit_info" class="btn btn-secondary w-100">Save
+                                Changes</button>
                         </div>
                     </form>
 
