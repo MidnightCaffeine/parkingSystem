@@ -22,12 +22,13 @@
 
         // If found you qr code
         function onScanSuccess(decodeText, decodeResult) {
-            alert("You Qr is : " + decodeText, decodeResult);
-
+            // alert("You Qr is : " + decodeText, decodeResult);
             var qr_data = decodeText, decodeResult;
 
+            htmlscanner.clear();
+
             $.ajax({
-                url: "lib/php/parking/parking.php",
+                url: "lib/php/bridge/iot_connection.php",
                 method: "POST",
                 data: {
                     qr_data,
@@ -41,7 +42,7 @@
                         timerProgressBar: true,
                         showConfirmButton: false,
                     });
-
+ 
                 },
             });
 
