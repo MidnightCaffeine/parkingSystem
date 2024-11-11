@@ -35,12 +35,44 @@ if (isset($_GET['ip']) && !empty($_GET['ip'])) {
 // Use the last IP address to construct the NodeMCU URL
 if (isset($_POST['qr_data'])) {
     if ($lastIpAddress) {
-        $dataToSend = $_POST['qr_data'];
+        $qr_data = $_POST['qr_data'];
+        $user_id = $_SESSION['user_id'];
+        $today = date('Y-m-d');
+        $mv = $_SESSION['mv_file'];
+        $timezone = new DateTimeZone('Asia/Manila');  // Change to the timezone you need
+        $date = new DateTime('now', $timezone);
 
-        $select = $pdo->prepare("SELECT data_value FROM system_data where data_value= :dataToSend");
-        $select->bindParam(':dataToSend', $dataToSend);
+        // Get the timestamp (number of seconds since Unix epoch)
+        $timestamp_now = $date->getTimestamp();
+
+        $select = $pdo->prepare("SELECT * FROM system_data WHERE data_value= :qr_data LIMIT 1");
+        $select->bindParam(':qr_data', $qr_data);
         $select->execute();
         if ($select->rowCount() > 0) {
+            $result = $select->fetch(PDO::FETCH_ASSOC);
+
+            $select_parking = $pdo->prepare("SELECT * FROM parking_log WHERE parking_date= :today AND user_id = :user_id");
+            $select_parking->bindParam(':today', $today);
+            $select_parking->bindParam(':user_id', $user_id);
+            if ($select_parking->execute()) {
+                $parking_result = $select_parking->fetch(PDO::FETCH_ASSOC);
+                if ($result['system_function'] == 'login_qr' && $select_parking->rowCount() > 0 && $parking_result['time_out'] != '') {
+                    $insert_parking = $pdo->prepare("INSERT INTO parking_log(user_id, user_mv_file, time_in, username, parking_date,vehicle_type) values(:id, :mv, :timestamp_now, :user, :today, :vehicle_type)");
+                    $insert_parking->bindParam(':id', $user_id);
+                    $insert_parking->bindParam(':mv', $mv);
+                    $insert_parking->bindParam(':timestamp_now', $timestamp_now);
+                    $insert_parking->bindParam(':user', $_SESSION['user_name']);
+                    $insert_parking->bindParam(':today', $today);
+                    $insert_parking->bindParam(':vehicle_type', $_SESSION['vehicle_type']);
+                    $insert_parking->execute();
+                    $dataToSend = 'Login';
+                } elseif ($result['system_function'] == 'logout_qr' && $select_parking->rowCount() > 0 && $parking_result['time_out'] == '') {
+                    $dataToSend = 'Logout';
+                }
+            }
+
+
+
             $nodeMcuUrl = "http://$lastIpAddress/?data=" . urlencode($dataToSend);
 
             // Sending data to NodeMCU

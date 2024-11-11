@@ -10,7 +10,7 @@ if (isset($_SESSION['vehicle_type']) && $_SESSION['vehicle_type'] == 'Motorcyle'
                         <i class="ri-motorbike-fill"></i>
                     </div>
                     <div class="ps-3">
-                        <h6>145</h6>
+                        <h6 id="motorcycle_slot_text"></h6>
                     </div>
                 </div>
             </div>
@@ -32,7 +32,7 @@ if (isset($_SESSION['vehicle_type']) && $_SESSION['vehicle_type'] == 'Tricycle' 
                         <i class="bi bi-minecart-loaded"></i>
                     </div>
                     <div class="ps-3">
-                        <h6>12</h6>
+                        <h6 id="tricycle_slot_text"></h6>
                     </div>
                 </div>
             </div>
@@ -54,7 +54,7 @@ if (isset($_SESSION['vehicle_type']) && $_SESSION['vehicle_type'] == 'Car' || is
                         <i class='bx bxs-car'></i>
                     </div>
                     <div class="ps-3">
-                        <h6>64</h6>
+                        <h6 id="car_slot_text"></h6>
                     </div>
                 </div>
             </div>

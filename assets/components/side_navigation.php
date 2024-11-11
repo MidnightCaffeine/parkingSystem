@@ -24,35 +24,35 @@
         <!-- Administrator-specific links: Manage and Backup & Restore -->
         <?php if ($_SESSION['user_type'] === 'Administrator'): ?>
             <li class="nav-item">
-                <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
+                <a class="nav-link <?= ($_SESSION['page'] === 'Users' || $_SESSION['page'] === 'Generate QR Code' || $_SESSION['page'] === 'System') ? '' : 'collapsed'; ?>" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
                     <i class="bi bi-building"></i>
                     <span>Manage</span>
                     <i class="bi bi-chevron-down ms-auto"></i>
                 </a>
-                <ul id="icons-nav" class="nav-content collapse" data-bs-parent="#sidebar-nav">
+                <ul id="icons-nav" class="nav-content <?= ($_SESSION['page'] === 'Users' || $_SESSION['page'] === 'Generate QR Code' || $_SESSION['page'] === 'System') ? '' : 'collapse'; ?>" data-bs-parent="#sidebar-nav">
                     <li>
-                        <a href="users.php">
+                        <a href="users.php" class="<?= ($_SESSION['page'] !== 'Users') ? '' : 'active' ?>">
                             <i class="bi bi-circle"></i>
                             <span>Users</span>
                         </a>
                     </li>
                     <li>
-                        <a href="system.php">
+                        <a href="system.php" class="<?= ($_SESSION['page'] !== 'System') ? '' : 'active' ?>">
                             <i class="bi bi-circle"></i>
                             <span>System</span>
                         </a>
                     </li>
                     <li>
-                        <a href="icons-boxicons.html">
+                        <a href="generate_qr.php" class="<?= ($_SESSION['page'] !== 'Generate QR Code') ? '' : 'active' ?>">
                             <i class="bi bi-circle"></i>
-                            <span>Boxicons</span>
+                            <span>Generate QR</span>
                         </a>
                     </li>
                 </ul>
             </li>
 
             <li class="nav-item">
-                <a class="nav-link <?= ($_SESSION['page'] !== 'Backup And Restore') ? 'collapsed' : '' ?>"
+                <a class="nav-link <?= ($_SESSION['page'] === 'Restore' || $_SESSION['page'] === 'Backup' || $_SESSION['page'] === 'Backup And Restore') ? '' : 'collapsed'; ?>"
                     href="backupAndRestore.php">
                     <i class="bi bi-hdd-stack"></i>
                     <span>Backup and Restore</span>

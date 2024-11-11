@@ -116,3 +116,91 @@
         </div>
     </div>
 </div>
+
+
+<div class="modal fade" id="motorcycle_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="user" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="title">Edit Motorcycle Slots</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="edit_form">
+                    <form id="motorcycle_form" action="" method="post">
+                        <p id="message"></p>
+                        <h3 id="description"></h3>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="motorcycle_slot" name="motorcycle_slot"
+                                placeholder="Motorcycle Slot">
+                            <label for="motorcycle_slot">Motorcycle Slot</label>
+                        </div>
+                        <div class="col-md-12 text-center block">
+                            <button type="submit" name="edit_info" id="edit_info" class="btn btn-secondary w-100">Save
+                                Changes</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="tricycle_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="user" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="title">Edit Tricycle Slots</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="edit_form">
+                    <form id="tricycle_form" action="" method="post">
+                        <p id="message"></p>
+                        <h3 id="tricycle_description"></h3>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="tricycle_slot" name="tricycle_slot"
+                                placeholder="tricycle Slot">
+                            <label for="tricycle_slot">Tricycle Slot</label>
+                        </div>
+                        <div class="col-md-12 text-center block">
+                            <button type="submit" name="edit_info" id="edit_info" class="btn btn-secondary w-100">Save
+                                Changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="car_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="user" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="title">Edit Car Slots</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="edit_form">
+                    <form id="car_form" action="" method="post">
+                        <p id="message"></p>
+                        <h3 id="car_description"></h3>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="car_slot" name="car_slot"
+                                placeholder="car Slot">
+                            <label for="car_slot">Car Slot</label>
+                        </div>
+                        <div class="col-md-12 text-center block">
+                            <button type="submit" name="edit_info" id="edit_info" class="btn btn-secondary w-100">Save
+                                Changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

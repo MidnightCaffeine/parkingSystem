@@ -10,7 +10,8 @@ $_SESSION['page'] = 'Home';
  *
  * @param string $userType The type of user from session data.
  */
-function includeUserComponents($userType) {
+function includeUserComponents($userType)
+{
     switch ($userType) {
         case 'User':
             require_once 'lib/php/components/scanner.php';
@@ -66,6 +67,50 @@ function includeUserComponents($userType) {
     require_once 'assets/components/main_scripts.php';
     require_once 'lib/php/components/modals.php';
     ?>
+    <script>
+        $(document).ready(function () {
+
+            var fetch = 'fetch';
+            var motorcycle_slot;
+            var tricycle_slot;
+            var car_slot;
+            var fetch_occupied = 'fetch';
+
+            $.ajax({
+                url: "lib/php/system/parking_slots.php",
+                method: "POST",
+                data: {
+                    fetch,
+                },
+                dataType: "json",
+                success: function (data) {
+                    motorcycle_slot = data.motorcycle_slot;
+                    tricycle_slot = data.tricycle_slot;
+                    car_slot = data.car_slot;
+                },
+            });
+
+            $.ajax({
+                url: "lib/php/system/parking_slots.php",
+                method: "POST",
+                data: {
+                    fetch_occupied,
+                },
+                dataType: "json",
+                success: function (data) {
+
+                    var car_slot_occupied = data.car_slot_occupied;
+                    var tricycle_slot_occupied = data.tricycle_slot_occupied;
+                    var motor_slot_occupied = data.motor_slot_occupied;
+
+                    $("#motorcycle_slot_text").text(motorcycle_slot - motor_slot_occupied);
+                    $("#tricycle_slot_text").text(tricycle_slot - tricycle_slot_occupied);
+                    $("#car_slot_text").text(car_slot - car_slot_occupied);
+                },
+            });
+
+        });
+    </script>
 </body>
 
 </html>

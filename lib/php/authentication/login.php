@@ -26,6 +26,7 @@ if (isset($_POST['login'])) {
                 $user_id = $row['user_id'];
                 $_SESSION['user_id'] = $user_id;
                 $_SESSION['user_email'] = $email;
+                $_SESSION['mv_file'] = $row['mv_file'];
 
                 // Handle user type
                 switch ($row['user_type']) {
