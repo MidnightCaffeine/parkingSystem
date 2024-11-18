@@ -136,6 +136,8 @@
                                 placeholder="Motorcycle Slot">
                             <label for="motorcycle_slot">Motorcycle Slot</label>
                         </div>
+                        <input type="text" class="form-control" id="motorcycle_slot_id" name="motorcycle_slot_id"
+                            hidden>
                         <div class="col-md-12 text-center block">
                             <button type="submit" name="edit_info" id="edit_info" class="btn btn-secondary w-100">Save
                                 Changes</button>
@@ -149,7 +151,8 @@
     </div>
 </div>
 
-<div class="modal fade" id="tricycle_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="user" aria-hidden="true">
+<div class="modal fade" id="tricycle_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="user" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
@@ -166,6 +169,7 @@
                                 placeholder="tricycle Slot">
                             <label for="tricycle_slot">Tricycle Slot</label>
                         </div>
+                        <input type="text" class="form-control" id="tricycle_slot_id" name="tricycle_slot_id" hidden>
                         <div class="col-md-12 text-center block">
                             <button type="submit" name="edit_info" id="edit_info" class="btn btn-secondary w-100">Save
                                 Changes</button>
@@ -177,7 +181,8 @@
     </div>
 </div>
 
-<div class="modal fade" id="car_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="user" aria-hidden="true">
+<div class="modal fade" id="car_modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="user" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
@@ -194,6 +199,7 @@
                                 placeholder="car Slot">
                             <label for="car_slot">Car Slot</label>
                         </div>
+                        <input type="text" class="form-control" id="car_slot_id" name="car_slot_id" hidden>
                         <div class="col-md-12 text-center block">
                             <button type="submit" name="edit_info" id="edit_info" class="btn btn-secondary w-100">Save
                                 Changes</button>

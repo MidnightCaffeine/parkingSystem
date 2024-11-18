@@ -125,6 +125,7 @@ include_once 'lib/php/only_admin.php';
                     dataType: "json",
                     success: function (data) {
                         $("#motorcycle_slot").val(data.slot_count);
+                        $("#motorcycle_slot_id").val(parking_id);
                         $("#description").text(data.description);
                     },
                 });
@@ -143,6 +144,7 @@ include_once 'lib/php/only_admin.php';
                     dataType: "json",
                     success: function (data) {
                         $("#tricycle_slot").val(data.slot_count);
+                        $("#tricycle_slot_id").val(parking_id);
                         $("#tricycle_description").text(data.description);
                     },
                 });
@@ -161,7 +163,131 @@ include_once 'lib/php/only_admin.php';
                     dataType: "json",
                     success: function (data) {
                         $("#car_slot").val(data.slot_count);
+                        $("#car_slot_id").val(parking_id);
                         $("#car_description").text(data.description);
+                    },
+                });
+            });
+
+            $("#car_form").submit(function (event) {
+                event.preventDefault();
+
+                var slot_id = $("#car_slot_id").val();
+                var slot = $("#car_slot").val();
+                var save = $("#edit_info").val();
+
+                $.ajax({
+                    url: "lib/php/system/parking_slots.php",
+                    method: "POST",
+                    data: {
+                        slot_id,
+                        slot,
+                        save
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        $("#car_modal").modal("hide");
+                        Swal.fire({
+                            title: "Changes Saved!",
+                            text: "Parking Slot Has Been Updated",
+                            icon: "success",
+                            showConfirmButton: true,
+                        });
+                        $.ajax({
+                            url: "lib/php/system/parking_slots.php",
+                            method: "POST",
+                            data: {
+                                fetch,
+                            },
+                            dataType: "json",
+                            success: function (data) {
+                                $("#motorcycle_slot_text").text(data.motorcycle_slot);
+                                $("#tricycle_slot_text").text(data.tricycle_slot);
+                                $("#car_slot_text").text(data.car_slot);
+                            },
+                        });
+                    },
+                });
+            });
+
+            $("#motorcycle_form").submit(function (event) {
+                event.preventDefault();
+
+                var slot_id = $("#motorcycle_slot_id").val();
+                var slot = $("#motorcycle_slot").val();
+                var save = $("#edit_info").val();
+
+                $.ajax({
+                    url: "lib/php/system/parking_slots.php",
+                    method: "POST",
+                    data: {
+                        slot_id,
+                        slot,
+                        save
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        $("#motorcycle_modal").modal("hide");
+                        Swal.fire({
+                            title: "Changes Saved!",
+                            text: "Parking Slot Has Been Updated",
+                            icon: "success",
+                            showConfirmButton: true,
+                        });
+                        $.ajax({
+                            url: "lib/php/system/parking_slots.php",
+                            method: "POST",
+                            data: {
+                                fetch,
+                            },
+                            dataType: "json",
+                            success: function (data) {
+                                $("#motorcycle_slot_text").text(data.motorcycle_slot);
+                                $("#tricycle_slot_text").text(data.tricycle_slot);
+                                $("#car_slot_text").text(data.car_slot);
+                            },
+                        });
+                    },
+                });
+            });
+
+            $("#tricycle_form").submit(function (event) {
+                event.preventDefault();
+
+                var slot_id = $("#tricycle_slot_id").val();
+                var slot = $("#tricycle_slot").val();
+                var save = $("#edit_info").val();
+
+                $.ajax({
+                    url: "lib/php/system/parking_slots.php",
+                    method: "POST",
+                    data: {
+                        slot_id,
+                        slot,
+                        save
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        $("#tricycle_modal").modal("hide");
+                        Swal.fire({
+                            title: "Changes Saved!",
+                            text: "Parking Slot Has Been Updated",
+                            icon: "success",
+                            showConfirmButton: true,
+                        });
+                        $.ajax({
+                            url: "lib/php/system/parking_slots.php",
+                            method: "POST",
+                            data: {
+                                fetch,
+                            },
+                            dataType: "json",
+                            success: function (data) {
+                                $("#motorcycle_slot_text").text(data.motorcycle_slot);
+                                $("#tricycle_slot_text").text(data.tricycle_slot);
+                                $("#car_slot_text").text(data.car_slot);
+                            },
+                        });
                     },
                 });
             });

@@ -97,8 +97,8 @@ if (isset($_POST["action"])) {
             $created_at = strtotime($row['created_at']);
             $sub_array[] = date("F d Y", $created_at);
 
-            // Add action buttons (view, delete, approve)
-            $sub_array[] = '
+            if ($_SESSION['user_type'] == 'Administrator') {
+                $sub_array[] = '
                 <button type="button" id="' . $row['user_id'] . '" class="btn btn-success view_user">
                     <i class="bi bi-eye"></i>
                 </button>
@@ -106,6 +106,13 @@ if (isset($_POST["action"])) {
                     <i class="bi bi-trash"></i>
                 </button>
             ';
+            } else {
+                $sub_array[] = '
+                <button type="button" id="' . $row['user_id'] . '" class="btn btn-success view_user">
+                    <i class="bi bi-eye"></i>
+                </button>
+            ';
+            }
 
             $data[] = $sub_array;
             $count++;

@@ -66,3 +66,19 @@ if (isset($_POST['fetch_occupied'])) {
 
     echo json_encode($output);
 }
+
+
+if (isset($_POST['slot_id'])) {
+
+    $slot_id = $_POST['slot_id'];
+    $slot = $_POST['slot'];
+
+    $update = $pdo->prepare("UPDATE system_data SET data_value = :slot WHERE system_id = :slot_id");
+
+    $update->bindparam('slot', $slot);
+    $update->bindparam('slot_id', $slot_id);
+    $update->execute();
+
+    $output["success"] = "success";
+    echo json_encode($output);
+}

@@ -81,9 +81,17 @@ if (isset($_POST["action"])) {
             $sub_array[] = $row['username'];
             $sub_array[] = $row['user_mv_file'];
 
-            // Remove time_in and time_out logic
-            $sub_array[] = ''; // Placeholder for removed time_in
-            $sub_array[] = ''; // Placeholder for removed time_out
+            $time_in = strtotime($row['time_in']);
+            $sub_array[] = date("h:i a", $time_in);
+
+            if ($row['time_out'] != null) {
+                $out = strtotime($row['time_out']);
+                $time_out = date("h:i a", $out);
+            } else {
+                $time_out = '';
+            }
+            $sub_array[] = $time_out; // Placeholder for removed time_out
+
 
             // Determine vehicle type
             switch ($row['vehicle_type']) {
