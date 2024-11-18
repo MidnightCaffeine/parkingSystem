@@ -1,5 +1,5 @@
 <?php
-if (isset($_SESSION['vehicle_type']) && $_SESSION['vehicle_type'] == 'Motorcyle' || isset($_SESSION['user_type'])) {
+if ((isset($_SESSION['vehicle_type']) && $_SESSION['vehicle_type'] == 'Motorcycle') || isset($_SESSION['user_type']) && $_SESSION['user_type'] == 'Guard') {
     ?>
     <div class="col-xxl-4 col-md-6">
         <div class="card info-card sales-card">
@@ -21,12 +21,12 @@ if (isset($_SESSION['vehicle_type']) && $_SESSION['vehicle_type'] == 'Motorcyle'
 ?>
 
 <?php
-if (isset($_SESSION['vehicle_type']) && $_SESSION['vehicle_type'] == 'Tricycle' || isset($_SESSION['user_type'])) {
+if ((isset($_SESSION['vehicle_type']) && $_SESSION['vehicle_type'] == 'Tricycle') || isset($_SESSION['user_type']) && $_SESSION['user_type'] == 'Guard') {
     ?>
     <div class="col-xxl-4 col-md-6">
         <div class="card info-card revenue-card">
             <div class="card-body">
-                <h5 class="card-title">Tricycle</span></h5>
+                <h5 class="card-title">Tricycle</h5>
                 <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                         <i class="bi bi-minecart-loaded"></i>
@@ -43,12 +43,12 @@ if (isset($_SESSION['vehicle_type']) && $_SESSION['vehicle_type'] == 'Tricycle' 
 ?>
 
 <?php
-if (isset($_SESSION['vehicle_type']) && $_SESSION['vehicle_type'] == 'Car' || isset($_SESSION['user_type'])) {
+if ((isset($_SESSION['vehicle_type']) && $_SESSION['vehicle_type'] == 'Car') || isset($_SESSION['user_type']) && $_SESSION['user_type'] == 'Guard') {
     ?>
     <div class="col-xxl-4 col-md-6">
         <div class="card info-card customers-card">
             <div class="card-body">
-                <h5 class="card-title">Car</span></h5>
+                <h5 class="card-title">Car</h5>
                 <div class="d-flex align-items-center">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
                         <i class='bx bxs-car'></i>

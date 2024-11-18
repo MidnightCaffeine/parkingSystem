@@ -4,6 +4,8 @@ session_start();
 ini_set('display_errors', 0);
 date_default_timezone_set("Asia/Manila");
 $_SESSION['page'] = "Restore";
+include_once 'lib/php/user_check.php';
+include_once 'lib/php/only_admin.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">

@@ -4,7 +4,8 @@ session_start();
 
 // Set the current page for session tracking
 $_SESSION['page'] = 'System';
-
+include_once 'lib/php/user_check.php';
+include_once 'lib/php/only_admin.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">

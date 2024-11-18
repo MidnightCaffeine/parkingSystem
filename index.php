@@ -1,6 +1,11 @@
 <?php
 require_once 'lib/php/database_handler/connection.php';
 session_start();
+$_SESSION['page'] = 'Login';
+if (isset($_SESSION['user_id'])) {
+    header("Location: home.php");
+    exit(); 
+}
 
 ?>
 <!DOCTYPE html>

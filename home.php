@@ -5,6 +5,8 @@ session_start();
 // Set the current page for session tracking
 $_SESSION['page'] = 'Home';
 
+include_once 'lib/php/user_check.php';
+
 /**
  * Include role-specific components based on the user type.
  *

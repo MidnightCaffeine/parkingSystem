@@ -1,7 +1,7 @@
 <?php
 session_start();
 include_once '../database_handler/connection.php';
-
+date_default_timezone_set('Asia/Manila'); // Set timezone to Manila
 
 if (isset($_POST['parking_id'])) {
     $output = array();
@@ -48,18 +48,18 @@ if (isset($_POST['fetch_occupied'])) {
     $today = date('Y-m-d');
 
 
-    $select = $pdo->prepare("SELECT * FROM parking_log WHERE parking_date= :today AND vehicle_type= 1");
-    $select->bindParam(':today', $today);
+    $select = $pdo->prepare("SELECT * FROM parking_log WHERE time_out IS NULL AND vehicle_type= 1");
+    // $select->bindParam(':today', $today);
     $select->execute();
     $output["car_slot_occupied"] = $select->rowCount();
 
-    $select = $pdo->prepare("SELECT * FROM parking_log WHERE parking_date= :today AND vehicle_type= 2");
-    $select->bindParam(':today', $today);
+    $select = $pdo->prepare("SELECT * FROM parking_log WHERE time_out IS NULL AND vehicle_type= 2");
+    // $select->bindParam(':today', $today);
     $select->execute();
     $output["tricycle_slot_occupied"] = $select->rowCount();
 
-    $select = $pdo->prepare("SELECT * FROM parking_log WHERE parking_date= :today AND vehicle_type= 3");
-    $select->bindParam(':today', $today);
+    $select = $pdo->prepare("SELECT * FROM parking_log WHERE time_out IS NULL AND vehicle_type= 3");
+    // $select->bindParam(':today', $today);
     $select->execute();
     $output["motor_slot_occupied"] = $select->rowCount();
 

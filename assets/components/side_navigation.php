@@ -21,7 +21,7 @@
             </li>
         <?php endif; ?>
 
-        <!-- Administrator-specific links: Manage and Backup & Restore -->
+        <!-- Administrator-specific links -->
         <?php if ($_SESSION['user_type'] === 'Administrator'): ?>
             <li class="nav-item">
                 <a class="nav-link <?= ($_SESSION['page'] === 'Users' || $_SESSION['page'] === 'Generate QR Code' || $_SESSION['page'] === 'System') ? '' : 'collapsed'; ?>" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">

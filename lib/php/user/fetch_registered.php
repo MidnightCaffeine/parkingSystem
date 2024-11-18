@@ -1,6 +1,6 @@
 <?php
 
-require_once 'connection.php';
+require_once '../database_handler/connection.php';
 session_start();
 $count = 1;
 
@@ -15,7 +15,7 @@ if (isset($_POST["action"])) {
 
         // Default search query to only include users with user_status = 0 and user_type = 2
         // Ensure filtering by today's date and before
-        $search_query = 'WHERE user_status = 0 AND user_type = 2 AND DATE(created_at) <= "' . date('Y-m-d') . '" AND ';
+        $search_query = 'WHERE user_status = 1 AND user_type = 2 AND ';
 
         // Date range filter (if both start_date and end_date are provided)
         if (isset($_POST["start_date"], $_POST["end_date"]) && $_POST["start_date"] != '' && $_POST["end_date"] != '') {
@@ -104,9 +104,6 @@ if (isset($_POST["action"])) {
                 </button>
                 <button type="button" id="' . $row['user_id'] . '" class="btn btn-danger delete_user">
                     <i class="bi bi-trash"></i>
-                </button>
-                <button type="button" id="' . $row['user_id'] . '" class="btn btn-success approve">
-                    <i class="bi bi-clipboard-check"></i> Approve
                 </button>
             ';
 

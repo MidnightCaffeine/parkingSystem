@@ -2,6 +2,12 @@
 require_once 'lib/php/database_handler/connection.php';
 session_start();
 $_SESSION['page'] = "Users";
+include_once 'lib/php/user_check.php';
+if ($_SESSION['user_type'] == 'User') {
+    header("Location: index.php");
+    exit(); 
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -75,7 +81,7 @@ $_SESSION['page'] = "Users";
                     "serverSide": true,
                     "order": [],
                     "ajax": {
-                        url: "lib/php/database_handler/fetch_register.php",
+                        url: "lib/php/user/fetch_registered.php",
                         type: "POST",
                         data: { action: 'fetch', start_date: start_date, end_date: end_date }
                     }

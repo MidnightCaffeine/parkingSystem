@@ -5,6 +5,8 @@ session_start();
 
 // Set the current page for session tracking
 $_SESSION['page'] = 'Generate QR Code';
+include_once 'lib/php/user_check.php';
+include_once 'lib/php/only_admin.php';
 
 if (isset($_POST['qr_text'])) {
     // Sanitize input to allow only plain text (letters, numbers, spaces, and some punctuation)

@@ -1,9 +1,5 @@
 <?php
-
-session_start();
-
-$user_type = $_SESSION['userType'];
-
-if($user_type !== "admin"){
-    
+if (!isset($_SESSION['user_id'])) {
+    header("Location: index.php");
+    exit(); 
 }

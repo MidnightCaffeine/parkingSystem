@@ -2,7 +2,8 @@
 require_once 'lib/php/database_handler/connection.php';
 session_start();
 $_SESSION['page'] = "Backup And Restore";
-
+include_once 'lib/php/user_check.php';
+include_once 'lib/php/only_admin.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">

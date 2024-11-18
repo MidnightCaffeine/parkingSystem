@@ -3,7 +3,8 @@ $_SESSION['page'] = "Backup";
 require_once 'lib/php/database_handler/connection.php';
 session_start();
 date_default_timezone_set("Asia/Manila");
-
+include_once 'lib/php/user_check.php';
+include_once 'lib/php/only_admin.php';
 ?>
 <!DOCTYPE html>
 <html lang="en">
