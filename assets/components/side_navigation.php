@@ -11,6 +11,16 @@
             </a>
         </li>
 
+        <!-- Users-specific link: Users -->
+        <?php if ($_SESSION['user_type'] === 'User'): ?>
+            <li class="nav-item">
+                <a class="nav-link <?= ($_SESSION['page'] !== 'Manage Vehicle') ? 'collapsed' : '' ?>" href="manage_vehicle.php">
+                    <i class='bx bxs-car'></i>
+                    <span>Manage Vehicle</span>
+                </a>
+            </li>
+        <?php endif; ?>
+
         <!-- Guard-specific link: Users -->
         <?php if ($_SESSION['user_type'] === 'Guard'): ?>
             <li class="nav-item">
@@ -24,12 +34,15 @@
         <!-- Administrator-specific links -->
         <?php if ($_SESSION['user_type'] === 'Administrator'): ?>
             <li class="nav-item">
-                <a class="nav-link <?= ($_SESSION['page'] === 'Users' || $_SESSION['page'] === 'Generate QR Code' || $_SESSION['page'] === 'System') ? '' : 'collapsed'; ?>" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
+                <a class="nav-link <?= ($_SESSION['page'] === 'Users' || $_SESSION['page'] === 'Generate QR Code' || $_SESSION['page'] === 'System') ? '' : 'collapsed'; ?>"
+                    data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
                     <i class="bi bi-building"></i>
                     <span>Manage</span>
                     <i class="bi bi-chevron-down ms-auto"></i>
                 </a>
-                <ul id="icons-nav" class="nav-content <?= ($_SESSION['page'] === 'Users' || $_SESSION['page'] === 'Generate QR Code' || $_SESSION['page'] === 'System') ? '' : 'collapse'; ?>" data-bs-parent="#sidebar-nav">
+                <ul id="icons-nav"
+                    class="nav-content <?= ($_SESSION['page'] === 'Users' || $_SESSION['page'] === 'Generate QR Code' || $_SESSION['page'] === 'System') ? '' : 'collapse'; ?>"
+                    data-bs-parent="#sidebar-nav">
                     <li>
                         <a href="users.php" class="<?= ($_SESSION['page'] !== 'Users') ? '' : 'active' ?>">
                             <i class="bi bi-circle"></i>

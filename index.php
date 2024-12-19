@@ -4,7 +4,7 @@ session_start();
 $_SESSION['page'] = 'Login';
 if (isset($_SESSION['user_id'])) {
     header("Location: home.php");
-    exit(); 
+    exit();
 }
 
 ?>
@@ -40,8 +40,7 @@ if (isset($_SESSION['user_id'])) {
                                         <div class="col-12">
                                             <label for="email" class="form-label">Email</label>
                                             <div class="input-group has-validation">
-                                                <input
-                                                    type="text" name="email" class="form-control" id="email"
+                                                <input type="text" name="email" class="form-control" id="email"
                                                     required>
                                                 <div class="invalid-feedback">Please enter your email.</div>
                                             </div>
@@ -61,6 +60,12 @@ if (isset($_SESSION['user_id'])) {
                                                 type="submit">Login</button></div>
                                         <div class="col-12">
                                             <p class="small mb-0">
+                                                <a data-target="#forgot_password" data-bs-toggle="modal"
+                                                    href="#forgot_password">Forgot
+                                                    password?</a>
+                                        </div>
+                                        <div class="col-12">
+                                            <p class="small mb-0">
                                                 Don't have account?
                                                 <a data-target="#register_form" data-bs-toggle="modal"
                                                     href="#register_form">Create an account</a>
@@ -77,6 +82,7 @@ if (isset($_SESSION['user_id'])) {
     <?php
     include_once 'assets/components/main_scripts.php';
     ?>
+
 
     <div class="modal fade" id="register_form" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
         aria-labelledby="register_formLabel" aria-hidden="true">
@@ -154,7 +160,8 @@ if (isset($_SESSION['user_id'])) {
                             <label for="mv_file">MV File / Plate Number</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="body_number" name="body_number" placeholder="password">
+                            <input type="text" class="form-control" id="body_number" name="body_number"
+                                placeholder="password">
                             <label for="body_number">Body Number</label>
                         </div>
                         <div class="form-floating mb-3">
@@ -166,16 +173,18 @@ if (isset($_SESSION['user_id'])) {
                             <label for="vehicle_type">Vehicle Type</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="password" class="form-control" id="register_password" name="register_password" placeholder="password">
+                            <input type="password" class="form-control" id="register_password" name="register_password"
+                                placeholder="password">
                             <label for="register_password">Password</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="password" class="form-control" id="confirm_password" name="confirm_password" placeholder="password">
+                            <input type="password" class="form-control" id="confirm_password" name="confirm_password"
+                                placeholder="password">
                             <label for="confirm_password">Confirm Password</label>
                         </div>
                         <div class="col-md-12 text-center block">
                             <button type="submit" name="signUp" id="signUp"
-                                class="btn btn-secondary w-100">Sign-Up</button>
+                                class="btn btn-primary w-100">Sign-Up</button>
                         </div>
                     </form>
                 </div>

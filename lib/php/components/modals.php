@@ -105,7 +105,7 @@
                         </div>
                         <input type="text" class="form-control" id="user_id" name="user_id" hidden>
                         <div class="col-md-12 text-center block">
-                            <button type="submit" name="edit_info" id="edit_info" class="btn btn-secondary w-100">Save
+                            <button type="submit" name="edit_info" id="edit_info" class="btn btn-primary w-100">Save
                                 Changes</button>
                         </div>
                     </form>
@@ -139,7 +139,7 @@
                         <input type="text" class="form-control" id="motorcycle_slot_id" name="motorcycle_slot_id"
                             hidden>
                         <div class="col-md-12 text-center block">
-                            <button type="submit" name="edit_info" id="edit_info" class="btn btn-secondary w-100">Save
+                            <button type="submit" name="edit_info" id="edit_info" class="btn btn-primary w-100">Save
                                 Changes</button>
                         </div>
                     </form>
@@ -171,7 +171,7 @@
                         </div>
                         <input type="text" class="form-control" id="tricycle_slot_id" name="tricycle_slot_id" hidden>
                         <div class="col-md-12 text-center block">
-                            <button type="submit" name="edit_info" id="edit_info" class="btn btn-secondary w-100">Save
+                            <button type="submit" name="edit_info" id="edit_info" class="btn btn-primary w-100">Save
                                 Changes</button>
                         </div>
                     </form>
@@ -201,12 +201,148 @@
                         </div>
                         <input type="text" class="form-control" id="car_slot_id" name="car_slot_id" hidden>
                         <div class="col-md-12 text-center block">
-                            <button type="submit" name="edit_info" id="edit_info" class="btn btn-secondary w-100">Save
+                            <button type="submit" name="edit_info" id="edit_info" class="btn btn-primary w-100">Save
                                 Changes</button>
                         </div>
                     </form>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="add_vehicle" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="user" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="title">Add Vehicle</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="add_vehicle_div">
+                    <form id="add_vehicle_form" action="" method="post">
+                        <p id="message"></p>
+                        <div class="form-floating mb-3">
+                            <select class="form-select" id="add_vehicle_type" name="add_vehicle_type">
+                                <option value="1">Car</option>
+                                <option value="2">Tricycle</option>
+                                <option value="3">Motor</option>
+                            </select>
+                            <label for="add_vehicle_type">Vehicle Type</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="add_mv_file" name="add_mv_file" placeholder="password" required>
+                            <label for="add_mv_file">MV File / Plate Number</label>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="add_body_number" name="add_body_number"
+                                placeholder="password" required>
+                            <label for="add_body_number">Body Number</label>
+                        </div>
+                        <div class="col-md-12 text-center block">
+                            <button type="submit" name="add_vehicle_btn" id="add_vehicle_btn"
+                                class="btn btn-primary w-100">Add Vehicle</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="forgot_password" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="forgot_passwordLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="forgot_passwordLabel">Forgot Password</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="forgot_pass" action="lib/php/database_handler/forgot_password.php" method="post">
+                    <p id="message"></p>
+                    <p id="sending"></p>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control" id="forget_email" name="forget_email"
+                            placeholder="Registered Email">
+                        <label for="forget_email">Registered Email</label>
+                    </div>
+                    <div class="col-md-12 text-center block">
+                        <button type="submit" name="send_otp" id="send_otp" class="btn btn-primary w-100">Send One
+                            Time Pin</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="verify" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="verifyLabel" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen-sm-down modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="verifyLabel">Forgot Password</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="d-flex justify-content-center align-items-center">
+                    <div class="card p-4 shadow-lg">
+                        <h4 class="text-center mb-4">Enter OTP</h4>
+                        <form id="otpForm">
+                            <div class="d-flex justify-content-center mb-3">
+                                <input type="text" id="otp1" class="form-control otp-input" maxlength="1" required>
+                                <input type="text" id="otp2" class="form-control otp-input" maxlength="1" required>
+                                <input type="text" id="otp3" class="form-control otp-input" maxlength="1" required>
+                                <input type="text" id="otp4" class="form-control otp-input" maxlength="1" required>
+                                <input type="text" id="otp5" class="form-control otp-input" maxlength="1" required>
+                                <input type="text" id="otp6" class="form-control otp-input" maxlength="1" required>
+                            </div>
+                            <button type="submit" name="otp_verify" id="otp_verify" class="btn btn-primary w-100">Verify
+                                OTP</button>
+                        </form>
+                        <p class="text-center mt-3">Didn't receive the code? <a href="#">Resend</a></p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="password_change" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="password_changeLabel" aria-hidden="true">
+    <div class="modal-dialog modal-fullscreen-sm-down modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="password_changeLabel">Forgot Password</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <form id="change_pass">
+                    <div class="form-floating mb-3">
+                        <input type="password" class="form-control" id="change_password" name="change_password"
+                            placeholder="new password">
+                        <label for="change_password">New Password</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="password" class="form-control" id="confirm_change" name="confirm_change"
+                            placeholder="password">
+                        <label for="confirm_change">Confirm Password</label>
+                    </div>
+                    <button type="submit" name="change" id="change" class="btn btn-primary w-100">Change
+                        Password</button>
+                </form>
+            </div>
+
         </div>
     </div>
 </div>

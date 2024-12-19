@@ -63,22 +63,27 @@ if (isset($_POST['qr_data'])) {
                 break;
         }
 
-        $select = $pdo->prepare("SELECT * FROM system_data WHERE data_value = :qr_data LIMIT 1");
+        $select = $pdo->prepare("SELECT * FROM system_data WHERE data_value = :qr_data");
         $select->bindParam(':qr_data', $qr_data);
-        $select->execute();
-        if ($select->rowCount() > 0) {
+        if ($select->execute()) {
             $result = $select->fetch(PDO::FETCH_ASSOC);
 
             // Check if there's already an active log for today (time_out IS NULL)
-            $select_parking = $pdo->prepare("SELECT * FROM parking_log WHERE parking_date = :today AND user_id = :user_id AND time_out IS NULL");
-            $select_parking->bindParam(':today', $today);
+            $select_parking = $pdo->prepare("SELECT * FROM parking_log WHERE user_id = :user_id AND time_out IS NULL");
             $select_parking->bindParam(':user_id', $user_id);
             $select_parking->execute();
 
             // If there's already an active session for today, prevent logging in again
             if ($select_parking->rowCount() > 0) {
-                echo "You already have an active session. Please log out first before logging in again.<br>";
-                return; // Stop the execution here if there's an active session
+                header('Content-Type: application/json');
+                http_response_code(400); // Set HTTP status code to 400 (Bad Request)
+                echo json_encode([
+                    'success' => false,
+                    'error' => 'Error'
+                ]);
+                exit; // Stop further execution
+                //    echo "You already have an active session. Please log out first before logging in again.<br>";
+                //    return; // Stop the execution here if there's an active session
             }
 
             // If no active session exists, proceed to insert a new login record
@@ -94,36 +99,32 @@ if (isset($_POST['qr_data'])) {
 
                 try {
                     $insert_parking->execute();
-                    $dataToSend = 'Login';
+                    $dataToSend = 'login';
                 } catch (PDOException $e) {
                     echo "Error inserting data: " . $e->getMessage() . "<br>";
                 }
             }
 
             // Handle logout logic
-            if ($result['system_function'] == 'logout_qr') {
+            elseif ($result['system_function'] == 'logout_qr') {
                 // Check if an active parking log exists to log out
-                $select_parking = $pdo->prepare("SELECT * FROM parking_log WHERE parking_date = :today AND user_id = :user_id AND time_out IS NULL");
-                $select_parking->bindParam(':today', $today);
+                $select_parking = $pdo->prepare("SELECT * FROM parking_log WHERE user_id = :user_id AND time_out IS NULL");
                 $select_parking->bindParam(':user_id', $user_id);
                 $select_parking->execute();
 
                 if ($select_parking->rowCount() > 0) {
                     // Update the time_out field to mark logout time
-                    $update_parking = $pdo->prepare("UPDATE parking_log SET time_out = :time_out WHERE user_id = :user_id AND parking_date = :today AND time_out IS NULL");
+                    $update_parking = $pdo->prepare("UPDATE parking_log SET time_out = :time_out WHERE user_id = :user_id AND time_out IS NULL");
                     $update_parking->bindParam(':time_out', $now);
                     $update_parking->bindParam(':user_id', $user_id);
-                    $update_parking->bindParam(':today', $today);
 
                     try {
                         $update_parking->execute();
                         echo "User logged out successfully.<br>";
-                        $dataToSend = 'Logout';
+                        $dataToSend = 'logout';
                     } catch (PDOException $e) {
                         echo "Error updating log: " . $e->getMessage() . "<br>";
                     }
-
-                    
                 } else {
                     // If there's no active parking log, prevent updating logout
                     echo "No active parking log found for today. You cannot log out.<br>";
@@ -145,4 +146,3 @@ if (isset($_POST['qr_data'])) {
         echo "Node MCU Hardware is not yet set up.<br>";
     }
 }
-?>

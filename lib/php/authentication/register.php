@@ -52,16 +52,35 @@ if (isset($_POST['signUp'])) {
       $insert->bindParam(':vehicle_type', $vehicle_type);
       if ($insert->execute()) {
 
+        $select = $pdo->prepare("SELECT * from users where email= :email");
+        $select->bindParam(':email', $email);
+        $select->execute();
+        $result = $select->fetch(PDO::FETCH_ASSOC);
+
+        $user_id = $result['user_id '];
+
+        $query = "INSERT INTO vehicles(user_id, mv_file, vehicle_type, body_number) values(:user_id, :mv_file, :vehicle_type, :body_number)";
+        $insert = $pdo->prepare($query);
+        $insert->bindParam(':user_id ', $user_id);
+        $insert->bindParam(':mv_file', $mv_file);
+        $insert->bindParam(':vehicle_type', $vehicle_type);
+        $insert->bindParam(':body_number', $body_number);
+        if ($insert->execute()) {
+          
           echo '
-        <script type="text/javascript">
-          Swal.fire({
-            icon: "success",
-            title: "Registration Successful!",
-            text: "Please authenticate the information on the admin to complete the process"
-          });
-        </script>
-      ';
-        
+            <script type="text/javascript">
+              Swal.fire({
+                icon: "success",
+                title: "Registration Successful!",
+                text: "Please authenticate the information on the admin to complete the process"
+              });
+            </script>
+          ';
+
+        }
+
+
+
       }
     }
   }

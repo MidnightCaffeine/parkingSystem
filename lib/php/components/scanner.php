@@ -42,8 +42,19 @@
                         timerProgressBar: true,
                         showConfirmButton: false,
                     });
- 
+
                 },
+                error: function (xhr, status, error) {
+                    // This runs if the server responds with an HTTP error (e.g., 400, 500)
+                    Swal.fire({
+                        title: "You already parked a vehicle!",
+                        text: "Unparked your vehicle first to login!",
+                        icon: "error",
+                        timer: 2000,
+                        timerProgressBar: true,
+                        showConfirmButton: false,
+                    });
+                }
             });
 
         }
@@ -53,10 +64,10 @@
             {
                 fps: 10,
                 qrbos: 250,
-                supportedScanTypes: 
-                [
-                    Html5QrcodeScanType.SCAN_TYPE_CAMERA
-                ] 
+                supportedScanTypes:
+                    [
+                        Html5QrcodeScanType.SCAN_TYPE_CAMERA
+                    ]
             }
         );
         htmlscanner.render(onScanSuccess);

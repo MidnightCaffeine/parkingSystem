@@ -83,7 +83,7 @@ if (isset($_POST["action"])) {
 
             $time_in = strtotime($row['time_in']);
             $sub_array[] = date("h:i a", $time_in);
-
+                        
             if ($row['time_out'] != null) {
                 $out = strtotime($row['time_out']);
                 $time_out = date("h:i a", $out);
